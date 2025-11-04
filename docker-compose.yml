@@ -1,0 +1,100 @@
+# MirrorWitness 2025-11-04
+
+version: '3.8'
+
+services:
+  sui-node:
+    image: mysten/sui-tools:mainnet
+    container_name: pot-sui-node
+    command: sui start --with-faucet --force-regenesis
+    ports:
+      - "9000:9000"
+      - "9123:9123"
+    volumes:
+      - ./sui-data:/root/.sui
+    networks:
+      - pot-network
+
+  witness1:
+    build:
+      context: ./python
+      dockerfile: Dockerfile.witness
+    container_name: pot-witness1
+    environment:
+      - WITNESS_ID=1
+      - WS_PORT=8766
+      - HMAC_SECRET=proof-of-task-secret-2025
+    ports:
+      - "8766:8766"
+    networks:
+      - pot-network
+    depends_on:
+      - sui-node
+
+  witness2:
+    build:
+      context: ./python
+      dockerfile: Dockerfile.witness
+    container_name: pot-witness2
+    environment:
+      - WITNESS_ID=2
+      - WS_PORT=8767
+      - HMAC_SECRET=proof-of-task-secret-2025
+    ports:
+      - "8767:8767"
+    networks:
+      - pot-network
+    depends_on:
+      - sui-node
+
+  witness3:
+    build:
+      context: ./python
+      dockerfile: Dockerfile.witness
+    container_name: pot-witness3
+    environment:
+      - WITNESS_ID=3
+      - WS_PORT=8768
+      - HMAC_SECRET=proof-of-task-secret-2025
+    ports:
+      - "8768:8768"
+    networks:
+      - pot-network
+    depends_on:
+      - sui-node
+
+  miner:
+    build:
+      context: ./python
+      dockerfile: Dockerfile.miner
+    container_name: pot-miner
+    environment:
+      - HMAC_SECRET=proof-of-task-secret-2025
+      - SUI_RPC=http://sui-node:9000
+      - WALRUS_API=http://sui-node:9000
+    networks:
+      - pot-network
+    depends_on:
+      - sui-node
+      - witness1
+      - witness2
+      - witness3
+
+  ui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    container_name: pot-ui
+    ports:
+      - "3000:3000"
+    networks:
+      - pot-network
+    depends_on:
+      - sui-node
+
+networks:
+  pot-network:
+    driver: bridge
+
+volumes:
+  sui-data:
