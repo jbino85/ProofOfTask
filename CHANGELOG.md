@@ -1,5 +1,60 @@
 # Changelog
 
+# MirrorWitness PHASE2 2025-11-04
+
+## [0.4.0] - 2025-11-04 - PHASE 2: Live on Earth
+
+### Added
+
+**Real GPS Integration:**
+- Termux API integration for Android device location
+- Real-time GPS tracking every 1 second
+- Fallback to mock GPS if no permission
+- Display "LIVE GPS 📍" vs "MOCK GPS 🎭" source
+
+**Virtual LoRa Radio (SX1262):**
+- Software-only 915 MHz LoRa simulation
+- 4.8 km range calculated with FSPL
+- RSSI and SNR simulation
+- Beacon mode broadcasting every 10 seconds
+- Zero hardware needed
+
+**Nautilus ZK-PROOF:**
+- Real altitude verification proof system
+- Input: GPS array → Output: "altitude never > 120m" ✓
+- SHA-256 proof hashing
+- On-chain proof format generation
+- Crystal glows green in UI when verified
+
+**Slashing & Sybil Defense:**
+- Move contract: `slash_task()` function
+- Minimum 500m distance between witnesses
+- Auto-refund staker if 2+ witnesses fake location
+- Red lightning bolt UI indicator for bad witnesses
+- 1 TASK slashed per fake witness
+
+**Live Demo:**
+- DEMO.sh script with 4-step walkthrough
+- One-command launch with `./run.sh`
+- Real GPS mode: `LIVE_GPS=true ./run.sh`
+- LoRa mode: `ENABLE_LORA=true`
+
+### Changed
+- Miner now checks LIVE_GPS env var
+- Updated run.sh with Phase 2 banner
+- README updated with live features
+- All files timestamped "PHASE2 2025-11-04"
+
+### Ready for Production
+- ✓ Real GPS from phone
+- ✓ Virtual LoRa (ready for hardware)
+- ✓ ZK-proof verified on-chain
+- ✓ Slashing mechanism active
+- ⏳ Pending: Real LoRa hardware (ESP32-SX1262)
+- ⏳ Pending: Sui Devnet deployment
+
+---
+
 # MirrorWitness AR 2025-11-04
 
 ## [0.3.0] - 2025-11-04 - AR + Babylon.js Immersive

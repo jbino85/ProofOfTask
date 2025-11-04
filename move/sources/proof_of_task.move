@@ -1,4 +1,4 @@
-// MirrorWitness 2025-11-04
+// MirrorWitness PHASE2 2025-11-04
 
 module proof_of_task::proof_of_task {
     use sui::object::{Self, UID};
@@ -18,11 +18,15 @@ module proof_of_task::proof_of_task {
     const E_INVALID_SIGNATURE: u64 = 3;
     const E_DUPLICATE_WITNESS: u64 = 4;
     const E_NOT_AUTHORIZED: u64 = 5;
+    const E_WITNESSES_TOO_CLOSE: u64 = 6;
+    const E_SYBIL_ATTACK: u64 = 7;
 
     // Constants
     const TASK_REWARD: u64 = 10_000_000_000; // 10 TASK
     const REQUIRED_WITNESSES: u64 = 3;
     const TASK_EXPIRY_MS: u64 = 300000; // 5 minutes
+    const MIN_WITNESS_DISTANCE_M: u64 = 500; // Minimum 500m between witnesses
+    const SLASH_AMOUNT: u64 = 1_000_000_000; // 1 TASK slashed per fake witness
 
     // Main Task object
     public struct Task has key, store {
@@ -165,5 +169,31 @@ module proof_of_task::proof_of_task {
 
     public fun is_expired(task: &Task, clock: &Clock): bool {
         clock::timestamp_ms(clock) > task.expires
+    }
+    
+    // Phase 2: Slashing for Sybil attacks
+    public entry fun slash_task(
+        task: &mut Task,
+        treasury: &mut Treasury,
+        ctx: &mut TxContext
+    ) {
+        // Only staker or witnesses can initiate slashing
+        assert!(
+            tx_context::sender(ctx) == task.staker || 
+            vector::contains(&task.witness_pubkeys, &tx_context::sender(ctx)),
+            E_NOT_AUTHORIZED
+        );
+        
+        // Check if witnesses are suspiciously close (< 500m)
+        // In production, this would verify GPS distance
+        // For now, we check if witness count is suspicious
+        let witness_count = vector::length(&task.witness_pubkeys);
+        
+        if (witness_count >= 2 && witness_count < REQUIRED_WITNESSES) {
+            // Slash and refund staker
+            // In production, this would burn from witness stakes
+            let refund = coin::take(&mut treasury.balance, SLASH_AMOUNT, ctx);
+            transfer::public_transfer(refund, task.staker);
+        };
     }
 }

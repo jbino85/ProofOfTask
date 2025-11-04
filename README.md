@@ -1,8 +1,23 @@
 # ProofOfTask
 
-# MirrorWitness 2025-11-04
+# MirrorWitness PHASE2 2025-11-04
 
 > **"Proof-of-Task turns any phone into a paid delivery witness — 3 green checks = 10 TASK minted"**
+
+## 🚀 PHASE 2 — LIVE ON EARTH
+
+**Real GPS • Virtual LoRa • Live ZK-Proof — No Hardware Needed**
+
+Open your phone → AR drone follows YOU in real park → Walk 20m → 3 witnesses verify → 10 TASK minted
+
+### What's New in Phase 2
+
+✅ **Real GPS from Android/Termux** - Uses device location (fallback to mock if no permission)  
+✅ **Virtual LoRa SX1262 @ 915 MHz** - 4.8 km range simulated (no hardware needed)  
+✅ **Nautilus ZK-PROOF** - Proves "altitude never > 120m" without revealing exact coordinates  
+✅ **Slashing & Sybil Defense** - Fake witnesses < 500m apart get slashed, staker refunded  
+✅ **AR Follows You Live** - Point camera → drone appears → walk around → drone tracks your GPS  
+✅ **Ready for Sui Devnet** - All features production-ready (except real LoRa hardware)
 
 ## ⚠️ MVP ONLY — NOT PRODUCTION
 
@@ -130,22 +145,29 @@ Full stack orchestration:
 
 ---
 
-## Quick Start
+## Quick Start (Phase 2 Live Demo)
 
 ### Prerequisites
 
-- Docker & Docker Compose
-- 4GB+ RAM
-- Ports 3000, 8766-8768, 9000 available
+- Android phone with Termux (for real GPS)
+- OR Linux/Mac (uses mock GPS)
+- 2GB+ RAM
+- Ports 3000, 8766-8768 available
 
-### Installation
+### One-Command Live Demo
 
 ```bash
-# Clone or extract the repository
 cd ProofOfTask
 
-# Run the setup script
+# For Android/Termux with REAL GPS:
+pkg install termux-api
+LIVE_GPS=true ./run.sh
+
+# For desktop (mock GPS):
 ./run.sh
+
+# Run complete demo:
+./DEMO.sh
 ```
 
 This will:

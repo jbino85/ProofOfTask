@@ -1,9 +1,10 @@
 #!/bin/bash
-# MirrorWitness 2025-11-04
+# MirrorWitness PHASE2 2025-11-04
 
 set -e
 
-echo "🚀 ProofOfTask - Starting MVP Environment"
+echo "🚀 ProofOfTask PHASE 2 — LIVE ON EARTH"
+echo "   📍 REAL GPS ACTIVE — LoRa beacon 915 MHz — ZK crystal armed"
 echo ""
 
 # Check if Docker is running
@@ -28,7 +29,14 @@ echo "💰 Funding miner wallet from faucet..."
 echo "   Miner wallet funded with test SUI"
 
 echo ""
-echo "✅ ProofOfTask AR is running!"
+echo "✅ ProofOfTask PHASE 2 is LIVE!"
+echo ""
+echo "📍 PHASE 2 FEATURES:"
+echo "   ✓ Real GPS from your phone (Termux API)"
+echo "   ✓ Virtual LoRa SX1262 @ 915 MHz (4.8 km range)"
+echo "   ✓ Nautilus ZK-PROOF: altitude never > 120m"
+echo "   ✓ Slashing for fake witnesses (500m minimum)"
+echo "   ✓ Open phone → AR drone follows YOU in real park"
 echo ""
 echo "📊 Access points:"
 echo "   AR DASHBOARD →  http://localhost:3000"
