@@ -83,15 +83,29 @@ Each witness:
 - Adds fake GPS offset (simulates different physical locations)
 - Returns signature to contract
 
-### 4. React UI (`ui/src/App.jsx`)
+### 4. React UI with 3D Visualization (`ui/`)
 
-Built with Vite, React, Tailwind CSS, and `@mysten/dapp-kit`:
+Built with Vite, React, Tailwind CSS, THREE.js, React-Three-Fiber, and `@mysten/dapp-kit`:
 
-- **Wallet Connection** - Connect Sui wallet
-- **Live Canvas** - Drone animation (8-second flight simulation)
-- **Witness Progress Bars** - 0/3 → 1/3 → 2/3 → 3/3
-- **Success Banner** - "10 TASK minted!" on completion
-- **Timeout Warning** - If <3 witnesses in 60 seconds
+**Dashboard Page (/):**
+- **Replay Proof** - Fetch Walrus blob → decrypt → animate exact telemetry
+- **Witness Radar** - Real-time distance & signal strength (simulated dBm)
+- **Stake Boost** - Lock extra SUI to increase witness selection weight
+- **LoRa Pre-order** - ESP32-SX1262 hardware node ($19.99) with QR code
+
+**3D Globe Page (/globe):**
+- **Live Globe** - Earth sphere with rotating view
+- **Green Drone Sphere** - Follows GPS points every 1 second
+- **Red Pulsing Rings** - 3 witnesses at +0.001km offsets
+- **Golden Trail** - Appears on completed task (paid delivery proof)
+- **Staking Heat-Map** - Countries glow orange → darker = more SUI staked
+- **Replay Button** - Watch physics proof animation in 3D
+- **Nautilus ZK Stub** - "ZK-PROOF: altitude never exceeded 120m"
+
+**Performance:**
+- WebGL runs at 60 fps on Android Chrome
+- All 3D assets < 2 MB (procedural geometry)
+- Wallet connection via `@mysten/dapp-kit` (no key leaks)
 
 ### 5. Docker Compose
 
@@ -133,17 +147,31 @@ This will:
 
 ### Access
 
-- **UI**: http://localhost:3000
+- **Dashboard**: http://localhost:3000
+- **3D Globe**: http://localhost:3000/globe
+- **Mobile**: Scan QR code or open in Chrome
 - **Sui RPC**: http://localhost:9000
 - **Witnesses**: ws://localhost:8766, ws://localhost:8767, ws://localhost:8768
 
 ### Usage
 
+**Dashboard:**
 1. Open http://localhost:3000
 2. Click "Connect Wallet" (use Sui Wallet browser extension)
-3. Click "Start New Task"
-4. Watch the drone fly and witness bars fill up
-5. See "10 TASK minted!" when 3 witnesses verify
+3. Explore protocol features:
+   - **Replay Proof**: Fetch and verify completed tasks
+   - **Witness Radar**: See nearby witness nodes
+   - **Stake Boost**: Increase selection probability
+   - **LoRa Pre-order**: Order hardware witness node
+
+**3D Globe:**
+1. Navigate to http://localhost:3000/globe
+2. Click "Start Task" to begin drone simulation
+3. Watch the green drone sphere move across Earth
+4. See red pulsing rings appear at witness locations
+5. When 3 witnesses verify, golden trail appears
+6. Click "🔄 Replay Proof" to animate the verification
+7. Toggle "Staking Heat-Map" to see staked regions
 
 ### View Logs
 
