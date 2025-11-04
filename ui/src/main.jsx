@@ -25,8 +25,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <WalletProvider autoConnect>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<TestPage />} />
-              <Route path="/immersive" element={<ImmersivePage />} />
+              <Route path="/" element={<ImmersivePage />} />
+              <Route path="/test" element={<TestPage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
