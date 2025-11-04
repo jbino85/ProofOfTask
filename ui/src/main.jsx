@@ -1,4 +1,4 @@
-// MirrorWitness 3D 2025-11-04
+// MirrorWitness AR 2025-11-04
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
@@ -6,8 +6,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { SuiClientProvider, WalletProvider } from '@mysten/dapp-kit'
 import { getFullnodeUrl } from '@mysten/sui/client'
+import ImmersivePage from './pages/ImmersivePage'
 import DashboardPage from './pages/DashboardPage'
-import GlobePage from './pages/GlobePage'
 import './index.css'
 import '@mysten/dapp-kit/dist/index.css'
 
@@ -24,8 +24,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <WalletProvider autoConnect>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<DashboardPage />} />
-              <Route path="/globe" element={<GlobePage />} />
+              <Route path="/" element={<ImmersivePage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </BrowserRouter>

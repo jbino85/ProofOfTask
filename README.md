@@ -83,29 +83,41 @@ Each witness:
 - Adds fake GPS offset (simulates different physical locations)
 - Returns signature to contract
 
-### 4. React UI with 3D Visualization (`ui/`)
+### 4. Immersive AR Dashboard (`ui/`)
 
-Built with Vite, React, Tailwind CSS, THREE.js, React-Three-Fiber, and `@mysten/dapp-kit`:
+Built with Babylon.js 7, React, Tailwind CSS, and `@mysten/dapp-kit`:
 
-**Dashboard Page (/):**
-- **Replay Proof** - Fetch Walrus blob → decrypt → animate exact telemetry
-- **Witness Radar** - Real-time distance & signal strength (simulated dBm)
-- **Stake Boost** - Lock extra SUI to increase witness selection weight
-- **LoRa Pre-order** - ESP32-SX1262 hardware node ($19.99) with QR code
+## **AUGMENTED REALITY PROOF-OF-TASK**
 
-**3D Globe Page (/globe):**
-- **Live Globe** - Earth sphere with rotating view
-- **Green Drone Sphere** - Follows GPS points every 1 second
-- **Red Pulsing Rings** - 3 witnesses at +0.001km offsets
-- **Golden Trail** - Appears on completed task (paid delivery proof)
-- **Staking Heat-Map** - Countries glow orange → darker = more SUI staked
-- **Replay Button** - Watch physics proof animation in 3D
-- **Nautilus ZK Stub** - "ZK-PROOF: altitude never exceeded 120m"
+**Fullscreen Babylon.js Scene:**
+- **Skybox** - Real-time starry night + aurora borealis animation
+- **Earth Globe** - Rotating sphere with auto-spin
+- **Procedural Drone** - Quadcopter with spinning rotors (green glow)
+- **Witness Obelisks** - 3 glowing pillars with pulsing energy rings
+- **Reflective Water** - Ground plane with specular highlights
+- **Golden Trail** - Particle ribbon that burns out after 10 seconds
 
-**Performance:**
-- WebGL runs at 60 fps on Android Chrome
-- All 3D assets < 2 MB (procedural geometry)
-- Wallet connection via `@mysten/dapp-kit` (no key leaks)
+**AR Mode (Mobile):**
+- **WebXR + 8thwall Fallback** - Point phone at flat surface
+- **Hold 3 seconds** - Drone lands on your desk/table
+- **Witnesses appear** - Floating holograms in real world
+- **QR Scanner** - Point at LoRa box → 3D model pops up + pre-order button
+- **Privacy-first** - No camera data stored, session ends on disconnect
+
+**Immersive UI (Babylon GUI):**
+- **HUD Overlay** - TASK: 12,470 | SUI: 89,234 | Witnesses: 342
+- **Auto-hide** - Bottom controls fade after 3 seconds
+- **Hotkeys** - G: Globe | A: AR | R: Replay | S: Stake | Space: Cycle
+- **Witness Radar** - 3D radar dish spins, beams lock onto witnesses
+- **Stake Boost** - Drag SUI coin into glowing obelisk, weight bar fills
+- **Nautilus ZK** - Floating crystal shows "Max alt: 117m ✓"
+- **Replay Proof** - Babylon animation replays exact GPS from Walrus blob
+
+**Mobile-First:**
+- Touch: pinch to zoom, drag to rotate, double-tap boost
+- 60 FPS on Android Chrome (Babylon.js + WebGL2)
+- All assets < 1.2 MB (procedural + compressed GLB)
+- QR scanner built-in for LoRa hardware pre-order
 
 ### 5. Docker Compose
 
@@ -147,31 +159,45 @@ This will:
 
 ### Access
 
-- **Dashboard**: http://localhost:3000
-- **3D Globe**: http://localhost:3000/globe
-- **Mobile**: Scan QR code or open in Chrome
+- **AR Dashboard**: http://localhost:3000
+- **Legacy Dashboard**: http://localhost:3000/dashboard
+- **Mobile**: Point phone → hold 3s → drone lands on your table
 - **Sui RPC**: http://localhost:9000
 - **Witnesses**: ws://localhost:8766, ws://localhost:8767, ws://localhost:8768
 
 ### Usage
 
-**Dashboard:**
-1. Open http://localhost:3000
-2. Click "Connect Wallet" (use Sui Wallet browser extension)
-3. Explore protocol features:
-   - **Replay Proof**: Fetch and verify completed tasks
-   - **Witness Radar**: See nearby witness nodes
-   - **Stake Boost**: Increase selection probability
-   - **LoRa Pre-order**: Order hardware witness node
+**Immersive AR Experience:**
+1. Open http://localhost:3000 (fullscreen Babylon.js scene)
+2. **Desktop**: Drag to rotate, scroll to zoom, use hotkeys
+3. **Mobile**: Pinch/drag to navigate, tap AR button
+4. Auto-simulation: 3 witnesses verify over 8 seconds → golden trail appears
 
-**3D Globe:**
-1. Navigate to http://localhost:3000/globe
-2. Click "Start Task" to begin drone simulation
-3. Watch the green drone sphere move across Earth
-4. See red pulsing rings appear at witness locations
-5. When 3 witnesses verify, golden trail appears
-6. Click "🔄 Replay Proof" to animate the verification
-7. Toggle "Staking Heat-Map" to see staked regions
+**Hotkeys:**
+- `G` - Globe mode (default)
+- `A` - AR mode (WebXR on mobile)
+- `R` - Replay proof animation
+- `S` - Show stake boost panel
+- `Space` - Cycle modes
+
+**AR Mode (Mobile Only):**
+1. Tap 📱 AR button in top-right
+2. Point camera at flat surface (floor/table)
+3. Hold phone steady for 3 seconds
+4. Drone and witnesses appear in real world
+5. Watch live delivery proof in AR
+
+**QR Scanner:**
+1. Tap 📷 QR button
+2. Point at LoRa box QR code
+3. 3D model overlay appears
+4. Tap "Pre-order" → $19.99 ESP32-SX1262 ships in 2 weeks
+
+**Protocol Features (Floating Panels):**
+- 💰 **Stake Boost**: Slider to lock SUI (10-10,000) for higher witness weight
+- 📡 **Witness Radar**: Live distance & signal strength to 3 witnesses
+- 🔄 **Replay Proof**: Fetch Walrus blob → animate exact telemetry
+- 🔮 **Nautilus ZK**: Crystal displays "Max alt: 117m ✓"
 
 ### View Logs
 

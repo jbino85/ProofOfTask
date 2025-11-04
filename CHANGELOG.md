@@ -1,6 +1,61 @@
 # Changelog
 
-# MirrorWitness 3D 2025-11-04
+# MirrorWitness AR 2025-11-04
+
+## [0.3.0] - 2025-11-04 - AR + Babylon.js Immersive
+
+### Added
+
+**Augmented Reality:**
+- WebXR AR mode with immersive-ar session support
+- 8thwall fallback for devices without WebXR
+- Point phone → hold 3s → drone lands on desk/table
+- Witnesses appear as floating holograms in real world
+- QR scanner for LoRa box → 3D model overlay + pre-order
+- Privacy-first: no camera data stored, session ends on disconnect
+
+**Babylon.js 7 Fullscreen Scene:**
+- Replaced React-Three-Fiber with Babylon.js
+- Starry night skybox with procedural stars
+- Animated aurora borealis effect
+- Reflective water ground plane
+- Procedural quadcopter drone with spinning rotors
+- 3 glowing obelisks (witnesses) with pulsing energy rings
+- Golden particle trail that burns out after 10 seconds
+
+**Immersive UI (Babylon GUI):**
+- HUD overlay: TASK/SUI/Witnesses stats
+- Auto-hide bottom panel after 3 seconds
+- Hotkeys: G=Globe, A=AR, R=Replay, S=Stake, Space=Cycle
+- Floating panels for Stake Boost, Witness Radar, Nautilus ZK
+- All UI in-engine (no HTML clutter)
+
+**Mobile-First:**
+- Touch controls: pinch zoom, drag rotate
+- 60 FPS on Android Chrome (WebGL2)
+- QR scanner built-in (html5-qrcode)
+- All assets < 1.2 MB (procedural + compressed GLB)
+
+**Protocol Integration:**
+- Stake Boost panel: slider 10-10,000 SUI
+- Witness Radar: 3D spinning dish with beam locks
+- Replay Proof: Babylon animation from Walrus blob
+- Nautilus ZK: Floating crystal "Max alt: 117m ✓"
+
+### Changed
+- Main route (/) now shows immersive Babylon.js scene
+- Dashboard moved to /dashboard (legacy)
+- Removed /globe route
+- Removed React-Three-Fiber dependencies
+- Updated run.sh with AR instructions
+
+### Performance
+- GLB models < 1.2 MB
+- 60 FPS target on mobile
+- WebGL2 optimizations
+- Procedural geometry for most assets
+
+---
 
 ## [0.2.0] - 2025-11-04 - 3D Enhancement
 
