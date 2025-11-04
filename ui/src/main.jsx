@@ -8,6 +8,7 @@ import { SuiClientProvider, WalletProvider } from '@mysten/dapp-kit'
 import { getFullnodeUrl } from '@mysten/sui/client'
 import ImmersivePage from './pages/ImmersivePage'
 import DashboardPage from './pages/DashboardPage'
+import TestPage from './pages/TestPage'
 import './index.css'
 import '@mysten/dapp-kit/dist/index.css'
 
@@ -24,7 +25,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <WalletProvider autoConnect>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<ImmersivePage />} />
+              <Route path="/" element={<TestPage />} />
+              <Route path="/immersive" element={<ImmersivePage />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

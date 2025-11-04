@@ -14,9 +14,14 @@ export default function ImmersivePage() {
 
   useEffect(() => {
     if (canvasRef.current && !sceneRef.current) {
-      // Initialize Babylon.js scene
-      sceneRef.current = new ProofOfTaskScene(canvasRef.current)
-      hudRef.current = new HUDManager(sceneRef.current.scene)
+      try {
+        // Initialize Babylon.js scene
+        sceneRef.current = new ProofOfTaskScene(canvasRef.current)
+        hudRef.current = new HUDManager(sceneRef.current.scene)
+      } catch (error) {
+        console.error('Failed to initialize Babylon.js:', error)
+        return
+      }
       
       // Simulate task progression
       setTimeout(() => {
@@ -103,12 +108,14 @@ export default function ImmersivePage() {
   }
 
   return (
-    <div className="relative w-full h-screen bg-black overflow-hidden">
+    <div className="relative w-full h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-black overflow-hidden">
       {/* Babylon.js Canvas */}
       <canvas
         ref={canvasRef}
         className="w-full h-full touch-none"
         style={{ outline: 'none' }}
+        width="1920"
+        height="1080"
       />
 
       {/* Floating Action Buttons */}
